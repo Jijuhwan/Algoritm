@@ -2,23 +2,20 @@ import java.util.*;
 
 class Solution {
     public int[] solution(int l, int r) {
-        // l과 r 사이에 0과 5로만 만들 수 있는 정수들
+        int[] answer = {};
         List<Integer> list = new ArrayList<>();
+        
         for(int i=l; i<=r; i++){
-            String s = i + "";
+            String s = String.valueOf(i);
             int cnt = 0;
             for(int j=0; j<s.length(); j++){
-                if(s.charAt(j) == 48 || s.charAt(j) == 53){
-                    cnt++;
-                }
+                if(s.charAt(j) == '5' || s.charAt(j) == '0') cnt++;
             }
-            if(cnt == s.length()){
-                list.add(i);
-            }
+            if(cnt == s.length()) list.add(i);
         }
-        int[] answer = list.stream().mapToInt(i -> i).toArray();
-        int[] empty = {-1};
-        if(answer.length == 0) return empty;
+        if(list.size() == 0) list.add(-1);
+        answer = list.stream().mapToInt(i->i).toArray();
+        
         return answer;
     }
 }
